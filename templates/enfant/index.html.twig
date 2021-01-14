@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les enfants{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3"> Voici la liste des enfants !</h1>
+    <div class="row">
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Note</th>
+                <th scope="col">Description</th>
+                <th scope="col">Inseré par</th>
+                <th></th>
+                <th><a href="{{ path('enfants_create') }}" class="btn btn-success btn-sm">Créer un enfant</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for enfant in enfants %}
+            <tr class="table-secondary">
+                <th>{{enfant.ENFNom}}</th>
+                <th>{{enfant.ENFPrenom}}</th>
+                <th>{{enfant.ENFNote}}</th>
+                <th>{{enfant.ENFDescription}}</th>
+                <th>{{enfant.ENFAuteur.TitreFullName}}</th>
+                <th>
+                    <a href="{{ path('enfants_edit', {'id': enfant.id}) }}">
+                    <button class="btn btn-outline-info btn-sm">Modifier l'enfant</button>
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ path('enfants_delete', {'id': enfant.id}) }}">
+                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm(`Êtes vous sur de vouloir supprimer l'enfant nommé : {{enfant.ENFFullName}} ?`)">Supprimer l'enfant</button>
+                    </a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
