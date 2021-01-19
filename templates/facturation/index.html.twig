@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les facturations{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3"> Voici la liste des facturations !</h1>
+    <div class="row">
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Enfant</th>
+                <th scope="col">Code</th>
+                <th scope="col">Moyen de paiement</th>
+                <th scope="col">Tarif</th>
+                <th scope="col">Option de paiement</th>
+                <th scope="col">Total</th>
+                <th scope="col">Statut</th>
+                <th></th>
+                <th><a href="{{ path('facturations_create') }}" class="btn btn-success btn-sm">Créer une facturation</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for facturation in facturations %}
+            <tr class="table-secondary">
+                <th>{{facturation.FACEnfant.ENFFullName}}</th>
+                <th>{{facturation.FACCode}}</th>
+                <th>{{facturation.FACMoyenPaiement}}</th>
+                <th>{{facturation.FACTarif}}</th>
+                <th>{{facturation.FACOptionPaiement}}</th>
+                <th>{{facturation.FACTotal}}</th>
+                <th>{{facturation.FACStatut}}</th>
+                <th>
+                    <a href="{{ path('facturations_edit', {'id': facturation.id}) }}">
+                    <button class="btn btn-outline-info btn-sm">Modifier la facturation</button>
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ path('facturations_delete', {'id': facturation.id}) }}">
+                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm(`Êtes vous sur de vouloir supprimer la facturation : {{facturation.FACCode}} ?`)">Supprimer la facturation</button>
+                    </a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

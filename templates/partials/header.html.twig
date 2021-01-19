@@ -13,6 +13,10 @@
                 <li class="nav-item">         
                     <a href="{{ path('enfants_index') }}" class="nav-link">Enfants</a>
                 </li>
+
+                <li class="nav-item">         
+                    <a href="{{ path('facturations_index') }}" class="nav-link">Facturations</a>
+                </li>
                 {% for role in app.user.RolesUser %}
                     {% if role.titre == "ROLE_ADMIN" %}
                         <li class="nav-item">

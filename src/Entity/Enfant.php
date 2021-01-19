@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\EnfantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,6 +46,16 @@ class Enfant
      * @ORM\JoinColumn(nullable=false)
      */
     private $ENF_auteur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_Enfant")
+     */
+    private $facturations;
+
+    public function __construct()
+    {
+        $this->facturations = new ArrayCollection();
+    }
 
     public function getENFFullName() {        
         return "{$this->ENF_nom} {$this->ENF_prenom}";
@@ -110,6 +122,36 @@ class Enfant
     public function setENFAuteur(?User $ENF_auteur): self
     {
         $this->ENF_auteur = $ENF_auteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Facturation[]
+     */
+    public function getFacturations(): Collection
+    {
+        return $this->facturations;
+    }
+
+    public function addFacturation(Facturation $facturation): self
+    {
+        if (!$this->facturations->contains($facturation)) {
+            $this->facturations[] = $facturation;
+            $facturation->setFACEnfant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacturation(Facturation $facturation): self
+    {
+        if ($this->facturations->removeElement($facturation)) {
+            // set the owning side to null (unless already changed)
+            if ($facturation->getFACEnfant() === $this) {
+                $facturation->setFACEnfant(null);
+            }
+        }
 
         return $this;
     }

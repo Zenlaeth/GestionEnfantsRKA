@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Role;
+use App\Entity\Enfant;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -45,7 +46,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Enfant::class, mappedBy="auteur")
      */
     private $enfants;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="users")
      */
@@ -71,6 +72,7 @@ class User implements UserInterface
     {
         $this->RolesUser = new ArrayCollection();
         $this->enfants = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,11 +116,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -127,6 +124,22 @@ class User implements UserInterface
     }
 
     // Fonctions obligatioires pour le User Interface
+
+    public function getRoles()
+    {
+        $roles = $this->RolesUser->map(function($role){
+            return $role->getTitre();
+        })->ToArray();
+
+        $roles[] = 'ROLE_FORMATEUR';
+
+        return $roles;
+    }
+    
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
 
     public function getSalt()
     {
@@ -138,20 +151,10 @@ class User implements UserInterface
         return $this->email;
     }
 
+
     public function eraseCredentials()
     {
         
-    }
-    
-    public function getRoles()
-    {
-        $roles = $this->RolesUser->map(function($role){
-            return $role->getTitre();
-        })->ToArray();
-
-        $roles[] = 'ROLE_FORMATEUR';
-
-        return $roles;
     }
 
     /**

@@ -28,6 +28,7 @@ class Role
      */
     private $users;
 
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -62,6 +63,7 @@ class Role
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
+            $user->addRolesUser($this);
         }
 
         return $this;
@@ -69,7 +71,9 @@ class Role
 
     public function removeUser(User $user): self
     {
-        $this->users->removeElement($user);
+        if ($this->users->removeElement($user)) {
+            $user->removeRolesUser($this);
+        }
 
         return $this;
     }

@@ -178,7 +178,7 @@ class UserAccountController extends AbstractController
     }
 
     /**
-     * Permet d'afficher le formualire de modification du mot de passe
+     * Permet d'afficher le formulaire de modification du mot de passe
      *
      * @Route("/account/password-update", name="account_password")
      * 
