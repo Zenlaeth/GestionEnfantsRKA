@@ -47,8 +47,7 @@ class FacturationController extends AbstractController
 
         //Vérifier si le formulaire est correct
         if($form->isSubmitted() && $form->isValid()){
-        
-            $facturation->setFACEnfant($this->getUser());
+            // ajout de l'enfant avec sa facturation
             
             $manager->persist($facturation);
             $manager->flush();
@@ -112,14 +111,14 @@ class FacturationController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function delete(Facturation $facturation, Enfant $enfant, EntityManagerInterface $manager) {
+    public function delete(Facturation $facturation, EntityManagerInterface $manager) {
         $manager->remove($facturation);
         $manager->flush();
 
         //Message flash de confirmation
         $this->addFlash(
             'success',
-            "La facturation de <strong>{$enfant->getENFFullName()}</strong> a bien été supprimée !"
+            "La facturation de <strong>{$facturation->getFACCode()}</strong> a bien été supprimée !"
         );
 
         //Redirection vers la liste

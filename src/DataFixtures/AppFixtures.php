@@ -94,7 +94,7 @@ class AppFixtures extends Fixture
         $facturations = [];
 
         $FAC_tarif=["29.90","358.80","895.80", "159.90"];
-        $FAC_moyenPaiement=["Chèque", "Carte bancaire", "Espèces"];
+        $FAC_MoyenPaiement=["Chèque", "Carte bancaire", "Espèces"];
         $FAC_statut=["Payé", "En retard"];
 
         for($i = 1; $i <= 30; $i++) {
@@ -105,7 +105,7 @@ class AppFixtures extends Fixture
             //creation aleatoire des donnees
             $facturation->setFACEnfant($enfant)
                         ->setFACCode($faker->ean8)
-                        ->setFACMoyenPaiement($FAC_moyenPaiement[mt_rand(0,sizeof($FAC_moyenPaiement)-1)])
+                        ->setFACMoyenPaiement($FAC_MoyenPaiement[mt_rand(0,sizeof($FAC_MoyenPaiement)-1)])
                         ->setFACTarif($FAC_tarif[mt_rand(0,sizeof($FAC_tarif)-1)])
                         ->setFACOptionPaiement(mt_rand(1,10))
                         ->setFACStatut($FAC_statut[mt_rand(0,sizeof($FAC_statut)-1)]);

@@ -26,12 +26,12 @@ class Facturation
      * @ORM\ManyToOne(targetEntity=Enfant::class, inversedBy="facturations")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $FAC_enfant;
+    private $FACEnfant;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="moyenPaiements")
      */
-    private $FAC_moyenPaiement;
+    private $FAC_MoyenPaiement;
 
     /**
      * @ORM\Column(type="float")
@@ -73,24 +73,12 @@ class Facturation
 
     public function getFACEnfant(): ?Enfant
     {
-        return $this->FAC_enfant;
+        return $this->FACEnfant;
     }
 
-    public function setFACEnfant(?Enfant $FAC_enfant): self
+    public function setFACEnfant(?Enfant $FACEnfant): self
     {
-        $this->FAC_enfant = $FAC_enfant;
-
-        return $this;
-    }
-
-    public function getFACMoyenPaiement(): ?string
-    {
-        return $this->FAC_moyenPaiement;
-    }
-
-    public function setFACMoyenPaiement(string $FAC_moyenPaiement): self
-    {
-        $this->FAC_moyenPaiement = $FAC_moyenPaiement;
+        $this->FACEnfant = $FACEnfant;
 
         return $this;
     }
@@ -139,6 +127,18 @@ class Facturation
     public function setFACStatut(?string $FAC_statut): self
     {
         $this->FAC_statut = $FAC_statut;
+
+        return $this;
+    }
+
+    public function getFACMoyenPaiement(): ?MoyenPaiement
+    {
+        return $this->FAC_MoyenPaiement;
+    }
+
+    public function setFACMoyenPaiement(?MoyenPaiement $Moyen_Facturation): self
+    {
+        $this->FAC_MoyenPaiement = $Moyen_Facturation;
 
         return $this;
     }

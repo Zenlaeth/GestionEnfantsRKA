@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Entity\EnfantRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EnfantRepository")
@@ -48,7 +48,7 @@ class Enfant
     private $ENF_auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_Enfant")
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FACEnfant")
      */
     private $facturations;
 
