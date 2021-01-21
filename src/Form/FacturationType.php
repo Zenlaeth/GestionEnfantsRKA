@@ -4,7 +4,9 @@ namespace App\Form;
 
 
 
+use App\Entity\Tarif;
 use App\Entity\Enfant;
+use App\Entity\Statut;
 use App\Form\EnfantType;
 use App\Entity\Facturation;
 use App\Entity\MoyenPaiement;
@@ -31,17 +33,29 @@ class FacturationType extends ApplicationType
             'required' => true,
             'label' => "Enfant"
         ])  
+            ->add('FAC_Code', IntegerType::class, $this->getConfiguration("Code", "Donnez un code"))
             ->add('FAC_MoyenPaiement',
             EntityType::class, [
             'class' => MoyenPaiement::class,
             'choice_label' => 'Moyen_Libelle',
             'required' => true,
             'label' => "Moyen de paiement"
+        ])   
+            ->add('FAC_Tarif',
+            EntityType::class, [
+            'class' => Tarif::class,
+            'choice_label' => 'Tarif_Libelle',
+            'required' => true,
+            'label' => "Tarif"
         ])
-            ->add('FAC_Code', IntegerType::class, $this->getConfiguration("Code", "Donnez un code"))
-            ->add('FAC_Tarif', MoneyType::class, $this->getConfiguration("Tarif", "Entrez un tarif"))
             ->add('FAC_OptionPaiement', IntegerType::class, $this->getConfiguration("Option de paiement", "Entrez le nombre de fois de paiement (en 1, 2, 3 fois...)"))
-            ->add('FAC_Statut', TextType::class, $this->getConfiguration("Statut", "Donnez un statut"))
+            ->add('FAC_Statut',
+            EntityType::class, [
+            'class' => Statut::class,
+            'choice_label' => 'Statut_Libelle',
+            'required' => true,
+            'label' => "Statut"
+        ])
         ;
     }
 

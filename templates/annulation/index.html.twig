@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les factures annulés{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3"> Voici la liste des factures annulés !</h1>
+    <div class="row">
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Enfant</th>
+                <th scope="col">Code</th>
+                <th scope="col">Moyen de paiement</th>
+                <th scope="col">Tarif</th>
+                <th scope="col">Option de paiement</th>
+                <th scope="col">Total</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Annulé par</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for annulation in annulations %}
+            <tr class="table-secondary">
+                <th>{{annulation.FACEnfant.ENFFullName}}</th>
+                <th>{{annulation.FACCode}}</th>
+                <th>{{annulation.FACMoyenPaiement.MoyenLibelle}}</th>
+                <th>{{annulation.FACTarif.TarifMontant}}</th>
+                <th>{{annulation.FACOptionPaiement}}</th>
+                <th>{{annulation.FACTotal}}</th>
+                <th>{{annulation.FACStatut.StatutLibelle}}</th>
+                <th>{{annulation.ANNUAuteur.TitreFullName}}</th>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

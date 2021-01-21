@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les factures modifiés{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3"> Voici la liste des factures modifiés !</h1>
+    <div class="row">
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Enfant</th>
+                <th scope="col">Code</th>
+                <th scope="col">Moyen de paiement</th>
+                <th scope="col">Tarif</th>
+                <th scope="col">Option de paiement</th>
+                <th scope="col">Total</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Modifié dernièrement par</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for modification in modifications %}
+            <tr class="table-secondary">
+                <th>{{modification.FACEnfant.ENFFullName}}</th>
+                <th>{{modification.FACCode}}</th>
+                <th>{{modification.FACMoyenPaiement.MoyenLibelle}}</th>
+                <th>{{modification.FACTarif.TarifMontant}}</th>
+                <th>{{modification.FACOptionPaiement}}</th>
+                <th>{{modification.FACTotal}}</th>
+                <th>{{modification.FACStatut.StatutLibelle}}</th>
+                <th>{{modification.MODIFAuteur.TitreFullName}}</th>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
