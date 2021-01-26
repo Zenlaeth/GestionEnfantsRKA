@@ -52,7 +52,7 @@ class Facturation
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $FAC_total;
+    private $FAC_total = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="facturations")
@@ -160,4 +160,6 @@ class Facturation
 
         return $this;
     }
+
+
 }

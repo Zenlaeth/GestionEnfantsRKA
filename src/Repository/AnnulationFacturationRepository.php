@@ -19,6 +19,11 @@ class AnnulationFacturationRepository extends ServiceEntityRepository
         parent::__construct($registry, AnnulationFacturation::class);
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('id' => 'DESC'));
+    }
+
     // /**
     //  * @return AnnulationFacturation[] Returns an array of AnnulationFacturation objects
     //  */

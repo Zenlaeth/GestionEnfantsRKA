@@ -52,6 +52,16 @@ class Enfant
      */
     private $facturations;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $ENF_dateNaiss;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=RepresentantLegal::class, inversedBy="enfants")
+     */
+    protected $ENF_Parent;
+
     public function __construct()
     {
         $this->facturations = new ArrayCollection();
@@ -152,6 +162,30 @@ class Enfant
                 $facturation->setFACEnfant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getENFDateNaiss(): ?\DateTimeInterface
+    {
+        return $this->ENF_dateNaiss;
+    }
+
+    public function setENFDateNaiss(?\DateTimeInterface $ENF_dateNaiss): self
+    {
+        $this->ENF_dateNaiss = $ENF_dateNaiss;
+
+        return $this;
+    }
+
+    public function getENFParent(): ?RepresentantLegal
+    {
+        return $this->ENF_Parent;
+    }
+
+    public function setENFParent(?RepresentantLegal $ENF_Parent): self
+    {
+        $this->ENF_Parent = $ENF_Parent;
 
         return $this;
     }

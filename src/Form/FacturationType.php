@@ -9,8 +9,11 @@ use App\Entity\Enfant;
 use App\Entity\Statut;
 use App\Form\EnfantType;
 use App\Entity\Facturation;
+use App\Entity\CarteBancaire;
 use App\Entity\MoyenPaiement;
 use App\Form\ApplicationType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,10 +40,15 @@ class FacturationType extends ApplicationType
             ->add('FAC_MoyenPaiement',
             EntityType::class, [
             'class' => MoyenPaiement::class,
-            'choice_label' => 'Moyen_Libelle',
+            'choice_label' => function ($facturation) {
+                return $facturation->getMoyenLibelle();
+            }
+            ,
             'required' => true,
             'label' => "Moyen de paiement"
-        ])   
+        ]
+        
+        )
             ->add('FAC_Tarif',
             EntityType::class, [
             'class' => Tarif::class,
@@ -57,6 +65,19 @@ class FacturationType extends ApplicationType
             'label' => "Statut"
         ])
         ;
+
+        /*$builder->addEventListener(
+        	FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $facturation = $event->getData(); //recuperation de l'objet sur lequel le formulaire se base
+	            $form = $event->getForm(); //recuperation du formulaire
+                
+                if ($facturation->getFACMoyenPaiement()->getMoyenLibelle()=='Carte bancaire') {
+                    $form->add('FAC_MoyenPaiement', CarteBancaireType::class);
+                } else {
+                    $form->add('civility', null, array('label' => 'Civilité : '));
+            }
+        });*/
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)

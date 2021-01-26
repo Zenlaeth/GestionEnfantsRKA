@@ -29,7 +29,7 @@
                 <th>{{annulation.FACMoyenPaiement.MoyenLibelle}}</th>
                 <th>{{annulation.FACTarif.TarifMontant}}</th>
                 <th>{{annulation.FACOptionPaiement}}</th>
-                <th>{{annulation.FACTotal}}</th>
+                <th>{{(annulation.FACTarif.TarifMontant / annulation.FACOptionPaiement)|round}}</th>
                 <th>{{annulation.FACStatut.StatutLibelle}}</th>
                 <th>{{annulation.ANNUAuteur.TitreFullName}}</th>
                 

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les representants{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3"> Voici la liste des representants !</h1>
+    <div class="row">
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Numero de téléphone</th>
+                <th scope="col">Adresse mail</th>
+                <th scope="col">Inséré par</th>
+                <th></th>
+                <th><a href="{{ path('representants_create') }}" class="btn btn-success btn-sm">Créer un representant</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for representant in representants %}
+            <tr class="table-secondary">
+                <th>{{representant.REPRNom}}</th>
+                <th>{{representant.REPRPrenom}}</th>
+                <th>{{representant.REPRAdresse}}</th>
+                <th>{{representant.REPRTel}}</th>
+                <th>{{representant.REPRMail}}</th>
+                <th>{{representant.REPRAuteur.TitreFullName}}</th>
+                <th>
+                    <a href="{{ path('representants_edit', {'id': representant.id}) }}">
+                    <button class="btn btn-outline-info btn-sm">Modifier le representant</button>
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ path('representants_delete', {'id': representant.id}) }}">
+                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm(`Êtes vous sur de vouloir supprimer le representant nommé : {{representant.REPRFullName}} ?`)">Supprimer le representant</button>
+                    </a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

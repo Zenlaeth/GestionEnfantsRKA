@@ -11,6 +11,7 @@
             <tr class="table-primary">
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
+                <th scope="col">Date de naissance</th>
                 <th scope="col">Note</th>
                 <th scope="col">Description</th>
                 <th scope="col">Inseré par</th>
@@ -24,6 +25,7 @@
             <tr class="table-secondary">
                 <th>{{enfant.ENFNom}}</th>
                 <th>{{enfant.ENFPrenom}}</th>
+                <th>{{enfant.ENFDateNaiss|date('d-m-Y')}}</th>
                 <th>{{enfant.ENFNote}}</th>
                 <th>{{enfant.ENFDescription}}</th>
                 <th>{{enfant.ENFAuteur.TitreFullName}}</th>

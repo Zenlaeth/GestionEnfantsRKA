@@ -29,7 +29,7 @@
                 <th>{{modification.FACMoyenPaiement.MoyenLibelle}}</th>
                 <th>{{modification.FACTarif.TarifMontant}}</th>
                 <th>{{modification.FACOptionPaiement}}</th>
-                <th>{{modification.FACTotal}}</th>
+                <th>{{(modification.FACTarif.TarifMontant / modification.FACOptionPaiement)|round}}</th>
                 <th>{{modification.FACStatut.StatutLibelle}}</th>
                 <th>{{modification.MODIFAuteur.TitreFullName}}</th>
                 

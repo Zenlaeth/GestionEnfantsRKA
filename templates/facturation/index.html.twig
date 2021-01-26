@@ -30,7 +30,7 @@
                 <th>{{facturation.FACMoyenPaiement.MoyenLibelle}}</th>
                 <th>{{facturation.FACTarif.TarifMontant}}</th>
                 <th>{{facturation.FACOptionPaiement}}</th>
-                <th>{{facturation.FACTotal}}</th>
+                <th>{{(facturation.FACTarif.TarifMontant / facturation.FACOptionPaiement)|round}}</th>
                 <th>{{facturation.FACStatut.StatutLibelle}}</th>
                 <th>{{facturation.FACAuteur.TitreFullName}}</th>
                 <th>

@@ -64,6 +64,11 @@ class User implements UserInterface
      */
     private $annulationFacturations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RepresentantLegal::class, mappedBy="REPR_auteur")
+     */
+    private $representantLegals;
+
 
     public function getFullName() {        
         return "{$this->nom} {$this->prenom}";
@@ -87,6 +92,7 @@ class User implements UserInterface
         $this->roles = new ArrayCollection();
         $this->annulationFacturations = new ArrayCollection();
         $this->facturations = new ArrayCollection();
+        $this->representantLegals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -339,6 +345,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($modificationFacturation->getMODIFAuteur() === $this) {
                 $modificationFacturation->setMODIFAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RepresentantLegal[]
+     */
+    public function getRepresentantLegals(): Collection
+    {
+        return $this->representantLegals;
+    }
+
+    public function addRepresentantLegal(RepresentantLegal $representantLegal): self
+    {
+        if (!$this->representantLegals->contains($representantLegal)) {
+            $this->representantLegals[] = $representantLegal;
+            $representantLegal->setREPRAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepresentantLegal(RepresentantLegal $representantLegal): self
+    {
+        if ($this->representantLegals->removeElement($representantLegal)) {
+            // set the owning side to null (unless already changed)
+            if ($representantLegal->getREPRAuteur() === $this) {
+                $representantLegal->setREPRAuteur(null);
             }
         }
 
