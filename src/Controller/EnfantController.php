@@ -124,4 +124,14 @@ class EnfantController extends AbstractController
         //Redirection vers la liste
         return $this->redirectToRoute("enfants_index");
     }
+
+    /**
+     * @Route("/enfant/{id}", name="enfant_show")
+     */
+    public function profil(Enfant $enfant)
+    {
+        return $this->render('enfant/profile.html.twig', [
+            'enfant' => $enfant
+        ]);
+    }
 }

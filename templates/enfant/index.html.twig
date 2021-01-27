@@ -11,10 +11,10 @@
             <tr class="table-primary">
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
-                <th scope="col">Date de naissance</th>
                 <th scope="col">Note</th>
                 <th scope="col">Description</th>
                 <th scope="col">Inseré par</th>
+                <th></th>
                 <th></th>
                 <th><a href="{{ path('enfants_create') }}" class="btn btn-success btn-sm">Créer un enfant</a></th>
             </tr>
@@ -25,10 +25,14 @@
             <tr class="table-secondary">
                 <th>{{enfant.ENFNom}}</th>
                 <th>{{enfant.ENFPrenom}}</th>
-                <th>{{enfant.ENFDateNaiss|date('d-m-Y')}}</th>
                 <th>{{enfant.ENFNote}}</th>
                 <th>{{enfant.ENFDescription}}</th>
                 <th>{{enfant.ENFAuteur.TitreFullName}}</th>
+                <th>
+                    <a href="{{ path('enfant_show', {'id': enfant.id}) }}">
+                    <button class="btn btn-outline-info btn-sm">Profil</button>
+                    </a>
+                </th>
                 <th>
                     <a href="{{ path('enfants_edit', {'id': enfant.id}) }}">
                     <button class="btn btn-outline-info btn-sm">Modifier l'enfant</button>

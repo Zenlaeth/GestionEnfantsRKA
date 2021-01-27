@@ -1,20 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MaterielController!{% endblock %}
+{% block title %}Les materiels{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/RKAIntranet/src/Controller/MaterielController.php'|file_link(0) }}">src/Controller/MaterielController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/RKAIntranet/templates/materiel/index.html.twig'|file_link(0) }}">templates/materiel/index.html.twig</a></code></li>
-    </ul>
+<div class="container">
+    <h1 class="my-3"> Voici la liste des materiels !</h1>
+    <div class="row">
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Référence</th>
+                <th scope="col">Libelle</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Quantité sortie</th>
+                <th scope="col">Quantité perdu</th>
+                <th scope="col">Quantité vendu</th>
+                <th scope="col">Quantité total</th>
+                <th scope="col">Inseré par</th>
+                <th></th>
+                <th><a href="{{ path('materiels_create') }}" class="btn btn-success btn-sm">Créer un materiel</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for materiel in materiels %}
+            <tr class="table-secondary">
+                <th>{{materiel.MATRef}}</th>
+                <th>{{materiel.MATLibelle}}</th>
+                <th>{{materiel.MATQuantite}}</th>
+                <th>{{materiel.MATQuantiteSortie}}</th>
+                <th>{{materiel.MATQuantitePerdu}}</th>
+                <th>{{materiel.MATQuantiteVendu}}</th>
+                <th>{{materiel.MATQuantiteTotal}}</th>
+                <th>{{materiel.MATAuteur.TitreFullName}}</th>
+                <th>
+                    <a href="{{ path('materiels_edit', {'id': materiel.id}) }}">
+                    <button class="btn btn-outline-info btn-sm">Modifier le materiel</button>
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ path('materiels_delete', {'id': materiel.id}) }}">
+                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm(`Êtes vous sur de vouloir supprimer le materiel : {{materiel.MATRef}} ?`)">Supprimer le materiel</button>
+                    </a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
 </div>
+
 {% endblock %}

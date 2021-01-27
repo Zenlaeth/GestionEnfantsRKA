@@ -7,7 +7,6 @@ use App\Entity\Enfant;
 use App\Entity\Facturation;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-use App\Entity\AnnulationFacturation;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,6 +68,11 @@ class User implements UserInterface
      */
     private $representantLegals;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Materiel::class, mappedBy="MAT_auteur")
+     */
+    private $materiels;
+
 
     public function getFullName() {        
         return "{$this->nom} {$this->prenom}";
@@ -89,10 +93,10 @@ class User implements UserInterface
     {
         $this->RolesUser = new ArrayCollection();
         $this->enfants = new ArrayCollection();
-        $this->roles = new ArrayCollection();
         $this->annulationFacturations = new ArrayCollection();
         $this->facturations = new ArrayCollection();
         $this->representantLegals = new ArrayCollection();
+        $this->materiels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -375,6 +379,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($representantLegal->getREPRAuteur() === $this) {
                 $representantLegal->setREPRAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Materiel[]
+     */
+    public function getMateriels(): Collection
+    {
+        return $this->materiels;
+    }
+
+    public function addMateriel(Materiel $materiel): self
+    {
+        if (!$this->materiels->contains($materiel)) {
+            $this->materiels[] = $materiel;
+            $materiel->setMATAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMateriel(Materiel $materiel): self
+    {
+        if ($this->materiels->removeElement($materiel)) {
+            // set the owning side to null (unless already changed)
+            if ($materiel->getMATAuteur() === $this) {
+                $materiel->setMATAuteur(null);
             }
         }
 

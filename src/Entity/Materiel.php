@@ -23,6 +23,11 @@ class Materiel
     private $MAT_ref;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $MAT_libelle;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $MAT_quantite;
@@ -47,6 +52,11 @@ class Materiel
      */
     private $MAT_quantiteVendu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="materiels")
+     */
+    private $MAT_auteur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +70,18 @@ class Materiel
     public function setMATRef(string $MAT_ref): self
     {
         $this->MAT_ref = $MAT_ref;
+
+        return $this;
+    }
+
+    public function getMATLibelle(): ?string
+    {
+        return $this->MAT_libelle;
+    }
+
+    public function setMATLibelle(string $MAT_libelle): self
+    {
+        $this->MAT_libelle = $MAT_libelle;
 
         return $this;
     }
@@ -120,6 +142,18 @@ class Materiel
     public function setMATQuantiteVendu(int $MAT_quantiteVendu): self
     {
         $this->MAT_quantiteVendu = $MAT_quantiteVendu;
+
+        return $this;
+    }
+
+    public function getMATAuteur(): ?User
+    {
+        return $this->MAT_auteur;
+    }
+
+    public function setMATAuteur(?User $MAT_auteur): self
+    {
+        $this->MAT_auteur = $MAT_auteur;
 
         return $this;
     }

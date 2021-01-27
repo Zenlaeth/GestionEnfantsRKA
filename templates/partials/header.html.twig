@@ -20,6 +20,9 @@
                 <li class="nav-item">         
                     <a href="{{ path('facturations_index') }}" class="nav-link">Factures</a>
                 </li>
+                <li class="nav-item">         
+                    <a href="{{ path('materiels_index') }}" class="nav-link">Materiels</a>
+                </li>
                 {% for role in app.user.RolesUser %}
                     {% if role.titre == "ROLE_ADMIN" %}
                         <li class="nav-item dropdown">

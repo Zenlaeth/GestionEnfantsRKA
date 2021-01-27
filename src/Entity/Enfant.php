@@ -59,6 +59,7 @@ class Enfant
 
     /**
      * @ORM\ManyToOne(targetEntity=RepresentantLegal::class, inversedBy="enfants")
+     * @ORM\JoinColumn(nullable=true)
      */
     protected $ENF_Parent;
 
