@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Role;
 use App\Entity\Enfant;
+use App\Entity\Facturation;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -52,6 +53,26 @@ class User implements UserInterface
      */
     private $RolesUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_auteur")
+     */
+    private $facturations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AnnulationFacturation::class, mappedBy="ANNU_auteur")
+     */
+    private $annulationFacturations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RepresentantLegal::class, mappedBy="REPR_auteur")
+     */
+    private $representantLegals;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Materiel::class, mappedBy="MAT_auteur")
+     */
+    private $materiels;
+
 
     public function getFullName() {        
         return "{$this->nom} {$this->prenom}";
@@ -72,7 +93,10 @@ class User implements UserInterface
     {
         $this->RolesUser = new ArrayCollection();
         $this->enfants = new ArrayCollection();
-        $this->roles = new ArrayCollection();
+        $this->annulationFacturations = new ArrayCollection();
+        $this->facturations = new ArrayCollection();
+        $this->representantLegals = new ArrayCollection();
+        $this->materiels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,6 +259,156 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($enfant->getENFAuteur() === $this) {
                 $enfant->setENFAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Facturation[]
+     */
+    public function getFacturations(): Collection
+    {
+        return $this->facturations;
+    }
+
+    public function addFacturation(Facturation $facturation): self
+    {
+        if (!$this->facturations->contains($facturation)) {
+            $this->facturations[] = $facturation;
+            $facturation->setFACAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacturation(Facturation $facturation): self
+    {
+        if ($this->facturations->removeElement($facturation)) {
+            // set the owning side to null (unless already changed)
+            if ($facturation->getFACAuteur() === $this) {
+                $facturation->setFACAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AnnulationFacturation[]
+     */
+    public function getAnnulationFacturations(): Collection
+    {
+        return $this->annulationFacturations;
+    }
+
+    public function addAnnulationFacturation(AnnulationFacturation $annulationFacturation): self
+    {
+        if (!$this->annulationFacturations->contains($annulationFacturation)) {
+            $this->annulationFacturations[] = $annulationFacturation;
+            $annulationFacturation->setANNUAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnulationFacturation(AnnulationFacturation $annulationFacturation): self
+    {
+        if ($this->annulationFacturations->removeElement($annulationFacturation)) {
+            // set the owning side to null (unless already changed)
+            if ($annulationFacturation->getANNUAuteur() === $this) {
+                $annulationFacturation->setANNUAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ModificationFacturation[]
+     */
+    public function getModificationFacturations(): Collection
+    {
+        return $this->modificationFacturations;
+    }
+
+    public function addModificationFacturation(ModificationFacturation $modificationFacturation): self
+    {
+        if (!$this->modificationFacturations->contains($modificationFacturation)) {
+            $this->modificationFacturations[] = $modificationFacturation;
+            $modificationFacturation->setMODIFAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModificationFacturation(ModificationFacturation $modificationFacturation): self
+    {
+        if ($this->modificationFacturations->removeElement($modificationFacturation)) {
+            // set the owning side to null (unless already changed)
+            if ($modificationFacturation->getMODIFAuteur() === $this) {
+                $modificationFacturation->setMODIFAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RepresentantLegal[]
+     */
+    public function getRepresentantLegals(): Collection
+    {
+        return $this->representantLegals;
+    }
+
+    public function addRepresentantLegal(RepresentantLegal $representantLegal): self
+    {
+        if (!$this->representantLegals->contains($representantLegal)) {
+            $this->representantLegals[] = $representantLegal;
+            $representantLegal->setREPRAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepresentantLegal(RepresentantLegal $representantLegal): self
+    {
+        if ($this->representantLegals->removeElement($representantLegal)) {
+            // set the owning side to null (unless already changed)
+            if ($representantLegal->getREPRAuteur() === $this) {
+                $representantLegal->setREPRAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Materiel[]
+     */
+    public function getMateriels(): Collection
+    {
+        return $this->materiels;
+    }
+
+    public function addMateriel(Materiel $materiel): self
+    {
+        if (!$this->materiels->contains($materiel)) {
+            $this->materiels[] = $materiel;
+            $materiel->setMATAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMateriel(Materiel $materiel): self
+    {
+        if ($this->materiels->removeElement($materiel)) {
+            // set the owning side to null (unless already changed)
+            if ($materiel->getMATAuteur() === $this) {
+                $materiel->setMATAuteur(null);
             }
         }
 

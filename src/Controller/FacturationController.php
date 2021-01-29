@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Enfant;
 use App\Entity\Facturation;
 use App\Form\FacturationType;
+use App\Entity\AnnulationFacturation;
+use App\Entity\ModificationFacturation;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FacturationRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FacturationController extends AbstractController
 {
     /**
-     * Permet d'afficher la liste de tous les facturations
-     * 
+     * Permet d'afficher la liste de toutes les facturations
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/facturations", name="facturations_index")
      * 
      */
@@ -33,7 +35,7 @@ class FacturationController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire de création d'une facturation
-     * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/facturations/new", name="facturations_create")
      * 
      * @return Response
@@ -47,8 +49,7 @@ class FacturationController extends AbstractController
 
         //Vérifier si le formulaire est correct
         if($form->isSubmitted() && $form->isValid()){
-        
-            $facturation->setFACEnfant($this->getUser());
+            $facturation->setFACAuteur($this->getUser());
             
             $manager->persist($facturation);
             $manager->flush();
@@ -56,7 +57,7 @@ class FacturationController extends AbstractController
             //Message flash de confirmation
             $this->addFlash(
                 'success',
-                "La facturation <strong>{$facturation->getFACCode()}</strong> a bien été enregistrée !"
+                "La facture <strong>{$facturation->getFACCode()}</strong> a bien été enregistrée !"
             );
 
             //Redirection vers la liste
@@ -70,9 +71,10 @@ class FacturationController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire d'édition
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/facturations/edit/{id}", name="facturations_edit")
-     * 
+     * @param Facturation $facturation
+     * @param EntityManagerInterface $manager
      * @return Response
      */
     public function edit(Facturation $facturation, Request $request, EntityManagerInterface $manager){
@@ -83,14 +85,25 @@ class FacturationController extends AbstractController
 
         //Vérifier si le formulaire est correct
         if($form->isSubmitted() && $form->isValid()){
-        
+            $modification = new ModificationFacturation();
+            $modification->setMODIFAuteur($this->getUser());
+
+            $modification->setFACCode($facturation->getFACCode());
+            $modification->setFACEnfant($facturation->getFACEnfant());
+            $modification->setFACOptionPaiement($facturation->getFACOptionPaiement());
+            $modification->setFACTotal($facturation->getFACTotal());
+            $modification->setFACMoyenPaiement($facturation->getFACMoyenPaiement());
+            $modification->setFACTarif($facturation->getFACTarif());
+            $modification->setFACStatut($facturation->getFACStatut());
+            
+            $manager->persist($modification);
             $manager->persist($facturation);
             $manager->flush();
 
             //Message flash de confirmation
             $this->addFlash(
                 'success',
-                "Les modifications de la facturation <strong>{$facturation->getFACCode()}</strong> ont bien été enregistrées !"
+                "Les modifications de la facture <strong>{$facturation->getFACCode()}</strong> ont bien été enregistrées !"
             );
 
             //Redirection vers la liste
@@ -104,25 +117,39 @@ class FacturationController extends AbstractController
     }
 
     /**
-     * Permet de supprimer une facturation
-     *
-     * @Route("/facturations/delete/{id}", name="facturations_delete")
+     * Permet d'annuler une facturation
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/facturations/cancel/{id}", name="facturations_cancel")
      * 
      * @param Facturation $facturation
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function delete(Facturation $facturation, Enfant $enfant, EntityManagerInterface $manager) {
+
+    public function cancel(Facturation $facturation, EntityManagerInterface $manager) {
+        $annulation = new AnnulationFacturation();
+        
+        $annulation->setANNUAuteur($this->getUser());
+
+        $annulation->setFACCode($facturation->getFACCode());
+        $annulation->setFACEnfant($facturation->getFACEnfant());
+        $annulation->setFACOptionPaiement($facturation->getFACOptionPaiement());
+        $annulation->setFACTotal($facturation->getFACTotal());
+        $annulation->setFACMoyenPaiement($facturation->getFACMoyenPaiement());
+        $annulation->setFACTarif($facturation->getFACTarif());
+        $annulation->setFACStatut($facturation->getFACStatut());
+        
+    
+        $manager->persist($annulation);
         $manager->remove($facturation);
         $manager->flush();
 
         //Message flash de confirmation
         $this->addFlash(
             'success',
-            "La facturation de <strong>{$enfant->getENFFullName()}</strong> a bien été supprimée !"
+            "La facture <strong>{$facturation->getFACCode()}</strong> a bien été annulée !"
         );
-
-        //Redirection vers la liste
+    
         return $this->redirectToRoute("facturations_index");
     }
 }

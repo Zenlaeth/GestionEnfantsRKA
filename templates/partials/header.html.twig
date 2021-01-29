@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ path('homepage') }}">
     <i class="fas fa-clinic-medical"></i>
-    Gestion enfants RKA</a>
+    Intranet RKA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,17 +10,28 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         {% if app.user %}
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">         
+                <li class="nav-item">
                     <a href="{{ path('enfants_index') }}" class="nav-link">Enfants</a>
-                </li>
+                </li>      
 
-                <li class="nav-item">         
-                    <a href="{{ path('facturations_index') }}" class="nav-link">Facturations</a>
-                </li>
                 {% for role in app.user.RolesUser %}
                     {% if role.titre == "ROLE_ADMIN" %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('users_index') }}">Utilisateurs</a>
+                        <li class="nav-item">    
+                            <a href="{{ path('representants_index') }}" class="nav-link">Representants</a>
+                        </li> 
+                        <li class="nav-item">         
+                            <a href="{{ path('facturations_index') }}" class="nav-link">Factures</a>
+                        </li>
+                        <li class="nav-item">         
+                            <a href="{{ path('materiels_index') }}" class="nav-link">Materiels</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ path('users_index') }}">Liste des uilisateurs</a>
+                            <a class="dropdown-item" href="{{ path('modifications_index') }}">Factures modifiés</a>
+                            <a class="dropdown-item" href="{{ path('annulations_index') }}">Factures annulés</a>
+                        </div>
                         </li>
                     {% endif %}
                 {% endfor %}

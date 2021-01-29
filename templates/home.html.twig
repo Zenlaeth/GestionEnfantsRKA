@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Laboratoire Swiss Bourdin
+    Intranet Robotics Kids Academy
 {% endblock %}
 
 {% block header %}
@@ -11,13 +11,13 @@
 {% block body %}
 <div class="container">
     <div class="jumbotron mt-3">
-        <h1 class="display-4">Robotics Kids Academy : Gestion des enfants</h1>
+        <h1 class="display-4">Intranet Robotics Kids Academy</h1>
         
         {% if app.user %}
             {# nada : rien n'est affiche si un utilisateur est connecte #}
         {% else %} 
             <hr class="my-5">
-            <p>Veuillez vous connecter pour pouvoir accéder à la liste des enfants.</p>
+            <p>Veuillez vous connecter pour pouvoir accéder à l'intranet.</p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{{ path('account_login') }}" role="button">Se connecter</a>
             </p>

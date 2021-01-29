@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profil de {{enfant.ENFFullName}}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-9">
+                <h1 class="my-4">{{enfant.ENFfullName}}</h1>
+                <div class="mt-3">
+                    <a href="{{ path('enfants_edit', {'id': enfant.id}) }}">
+                    <button style='margin-right:16px' class="btn btn-outline-info">Modifier l'enfant</button>
+                    </a>
+                    <a href="{{ path('enfants_delete', {'id': enfant.id}) }}">
+                    <button style='margin-right:16px' class="btn btn-outline-danger" onclick="return confirm(`Êtes vous sur de vouloir supprimer l'enfant nommé : {{enfant.ENFFullName}} ?`)">Supprimer l'enfant</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h2 class="my-3">Date de naissance</h2>
+            {{enfant.ENFDateNaiss|date('d-m-Y')}}
+        </div>
+
+        <div class="mt-5">
+        <h2 class="my-3">Représentant légal</h2>
+
+        <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Numero de téléphone</th>
+                <th scope="col">Adresse mail</th>
+                <th scope="col">Inséré par</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-secondary">
+                <th>{{enfant.ENFParent.REPRNom}}</th>
+                <th>{{enfant.ENFParent.REPRPrenom}}</th>
+                <th>{{enfant.ENFParent.REPRAdresse}}</th>
+                <th>{{enfant.ENFParent.REPRTel}}</th>
+                <th>{{enfant.ENFParent.REPRMail}}</th>
+                <th>{{enfant.ENFParent.REPRAuteur.TitreFullName}}</th>
+            </tr>
+        </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}

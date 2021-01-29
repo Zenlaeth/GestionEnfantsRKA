@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les facturations{% endblock %}
+{% block title %}Les factures{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1 class="my-3"> Voici la liste des facturations !</h1>
+    <h1 class="my-3"> Voici la liste des factures !</h1>
     <div class="row">
         <table class="table table-hover">
         <thead>
@@ -16,8 +16,9 @@
                 <th scope="col">Option de paiement</th>
                 <th scope="col">Total</th>
                 <th scope="col">Statut</th>
+                <th scope="col">Inséré par</th>
                 <th></th>
-                <th><a href="{{ path('facturations_create') }}" class="btn btn-success btn-sm">Créer une facturation</a></th>
+                <th><a href="{{ path('facturations_create') }}" class="btn btn-success btn-sm">Créer une facture</a></th>
             </tr>
         </thead>
         <tbody>
@@ -26,19 +27,20 @@
             <tr class="table-secondary">
                 <th>{{facturation.FACEnfant.ENFFullName}}</th>
                 <th>{{facturation.FACCode}}</th>
-                <th>{{facturation.FACMoyenPaiement}}</th>
-                <th>{{facturation.FACTarif}}</th>
+                <th>{{facturation.FACMoyenPaiement.MoyenLibelle}}</th>
+                <th>{{facturation.FACTarif.TarifMontant}}</th>
                 <th>{{facturation.FACOptionPaiement}}</th>
-                <th>{{facturation.FACTotal}}</th>
-                <th>{{facturation.FACStatut}}</th>
+                <th>{{(facturation.FACTarif.TarifMontant / facturation.FACOptionPaiement)|round}}</th>
+                <th>{{facturation.FACStatut.StatutLibelle}}</th>
+                <th>{{facturation.FACAuteur.TitreFullName}}</th>
                 <th>
                     <a href="{{ path('facturations_edit', {'id': facturation.id}) }}">
-                    <button class="btn btn-outline-info btn-sm">Modifier la facturation</button>
+                    <button class="btn btn-outline-info btn-sm">Modifier la facture</button>
                     </a>
                 </th>
                 <th>
-                    <a href="{{ path('facturations_delete', {'id': facturation.id}) }}">
-                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm(`Êtes vous sur de vouloir supprimer la facturation : {{facturation.FACCode}} ?`)">Supprimer la facturation</button>
+                    <a href="{{ path('facturations_cancel', {'id': facturation.id}) }}">
+                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm(`Êtes vous sur de vouloir annuler la facture : {{facturation.FACCode}} ?`)">Annuler la facture</button>
                     </a>
                 </th>
             </tr>

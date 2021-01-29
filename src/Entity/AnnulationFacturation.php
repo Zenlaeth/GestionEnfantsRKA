@@ -4,12 +4,12 @@ namespace App\Entity;
 
 use App\Entity\Tarif;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\FacturationRepository;
+use App\Repository\AnnulationFacturationRepository;
 
 /**
- * @ORM\Entity(repositoryClass=FacturationRepository::class)
+ * @ORM\Entity(repositoryClass=AnnulationFacturationRepository::class)
  */
-class Facturation
+class AnnulationFacturation
 {
     /**
      * @ORM\Id
@@ -52,12 +52,12 @@ class Facturation
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $FAC_total = 0;
+    private $FAC_total;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="facturations")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annulationFacturations")
      */
-    private $FAC_auteur;
+    private $ANNU_auteur;
     
 
     public function getId(): ?int
@@ -149,17 +149,15 @@ class Facturation
         return $this;
     }
 
-    public function getFACAuteur(): ?User
+    public function getANNUAuteur(): ?User
     {
-        return $this->FAC_auteur;
+        return $this->ANNU_auteur;
     }
 
-    public function setFACAuteur(?User $FAC_auteur): self
+    public function setANNUAuteur(?User $ANNU_auteur): self
     {
-        $this->FAC_auteur = $FAC_auteur;
+        $this->ANNU_auteur = $ANNU_auteur;
 
         return $this;
     }
-
-
 }

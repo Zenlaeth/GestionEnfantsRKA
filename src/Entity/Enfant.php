@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Entity\EnfantRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EnfantRepository")
@@ -48,9 +48,20 @@ class Enfant
     private $ENF_auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_Enfant")
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FACEnfant")
      */
     private $facturations;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $ENF_dateNaiss;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=RepresentantLegal::class, inversedBy="enfants")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $ENF_Parent;
 
     public function __construct()
     {
@@ -152,6 +163,30 @@ class Enfant
                 $facturation->setFACEnfant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getENFDateNaiss(): ?\DateTimeInterface
+    {
+        return $this->ENF_dateNaiss;
+    }
+
+    public function setENFDateNaiss(?\DateTimeInterface $ENF_dateNaiss): self
+    {
+        $this->ENF_dateNaiss = $ENF_dateNaiss;
+
+        return $this;
+    }
+
+    public function getENFParent(): ?RepresentantLegal
+    {
+        return $this->ENF_Parent;
+    }
+
+    public function setENFParent(?RepresentantLegal $ENF_Parent): self
+    {
+        $this->ENF_Parent = $ENF_Parent;
 
         return $this;
     }

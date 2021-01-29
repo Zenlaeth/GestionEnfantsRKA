@@ -15,6 +15,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Inseré par</th>
                 <th></th>
+                <th></th>
                 <th><a href="{{ path('enfants_create') }}" class="btn btn-success btn-sm">Créer un enfant</a></th>
             </tr>
         </thead>
@@ -27,6 +28,11 @@
                 <th>{{enfant.ENFNote}}</th>
                 <th>{{enfant.ENFDescription}}</th>
                 <th>{{enfant.ENFAuteur.TitreFullName}}</th>
+                <th>
+                    <a href="{{ path('enfant_show', {'id': enfant.id}) }}">
+                    <button class="btn btn-outline-info btn-sm">Profil</button>
+                    </a>
+                </th>
                 <th>
                     <a href="{{ path('enfants_edit', {'id': enfant.id}) }}">
                     <button class="btn btn-outline-info btn-sm">Modifier l'enfant</button>

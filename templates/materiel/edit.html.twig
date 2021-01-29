@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edition d'une facture{% endblock %}
+{% block title %}Edition d'un materiel{% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <h1 class="my-3">Modifier la facture : <em>{{facturation.FACCode}}</em></h1>
+        <h1 class="my-3">Modifier la facture : <em>{{materiel.MATRef}}</em></h1>
 
         {{ form_start(form) }}
 

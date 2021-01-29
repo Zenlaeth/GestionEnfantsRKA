@@ -24,7 +24,7 @@ class Role
     private $titre;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="roles")
+     * @ORM\ManyToMany(targetEntity=User::class)
      */
     private $users;
 
@@ -63,7 +63,6 @@ class Role
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addRolesUser($this);
         }
 
         return $this;
@@ -71,9 +70,7 @@ class Role
 
     public function removeUser(User $user): self
     {
-        if ($this->users->removeElement($user)) {
-            $user->removeRolesUser($this);
-        }
+        $this->users->removeElement($user);
 
         return $this;
     }

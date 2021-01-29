@@ -1,17 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Création d'un representant{% endblock %}
+{% block title %}Création d'un materiel{% endblock %}
 
 
 {% block body %}
     <div class="container">
-        <h1 class="my-3">Créer un nouveau representant</h1>
+        <h1 class="my-3">Créer un nouveau materiel</h1>
        
         {{ form_start(form) }}
 
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary">Créer un nouveau representant</button>
+        <button type="submit" class="btn btn-primary">Créer un nouveau materiel</button>
 
         {{ form_end(form) }}
     </div>

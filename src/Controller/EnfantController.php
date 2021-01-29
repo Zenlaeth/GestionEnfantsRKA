@@ -32,7 +32,7 @@ class EnfantController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire de création d'un enfant
-     * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/enfants/new", name="enfants_create")
      * 
      * @return Response
@@ -69,7 +69,7 @@ class EnfantController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire d'édition
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/enfants/edit/{id}", name="enfants_edit")
      * 
      * @return Response
@@ -104,7 +104,7 @@ class EnfantController extends AbstractController
 
     /**
      * Permet de supprimer un enfant
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/enfants/delete/{id}", name="enfants_delete")
      * 
      * @param Enfant $enfant
@@ -123,5 +123,16 @@ class EnfantController extends AbstractController
 
         //Redirection vers la liste
         return $this->redirectToRoute("enfants_index");
+    }
+
+    /**
+     * Permet d'afficher le profil d'un enfant
+     * @Route("/enfant/{id}", name="enfant_show")
+     */
+    public function profil(Enfant $enfant)
+    {
+        return $this->render('enfant/profile.html.twig', [
+            'enfant' => $enfant
+        ]);
     }
 }

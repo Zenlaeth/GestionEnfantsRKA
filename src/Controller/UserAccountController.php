@@ -24,6 +24,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet d'afficher la liste de tous les utilisateurs
      * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/users", name="users_index")
      */
     public function index(UserRepository $repo)
@@ -38,6 +39,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet d'afficher le formulaire de création d'un utilisateur
      * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/users/new", name="users_create")
      * 
      * @return Response
@@ -84,6 +86,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet d'afficher le formulaire d'édition
      *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/users/edit/{id}", name="users_edit")
      * 
      * @return Response
@@ -124,6 +127,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet de supprimer un user
      *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/users/delete/{id}", name="users_delete")
      * 
      * @param User $user
