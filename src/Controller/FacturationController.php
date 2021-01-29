@@ -20,7 +20,11 @@ class FacturationController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de toutes les facturations
+<<<<<<< HEAD
      * @IsGranted("ROLE_ADMIN")
+=======
+     * 
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/facturations", name="facturations_index")
      * 
      */
@@ -118,7 +122,11 @@ class FacturationController extends AbstractController
 
     /**
      * Permet d'annuler une facturation
+<<<<<<< HEAD
      * @IsGranted("ROLE_ADMIN")
+=======
+     * 
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/facturations/cancel/{id}", name="facturations_cancel")
      * 
      * @param Facturation $facturation

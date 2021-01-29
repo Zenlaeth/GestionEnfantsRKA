@@ -17,7 +17,11 @@ class MaterielController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de tous les materiels
+<<<<<<< HEAD
      * @IsGranted("ROLE_ADMIN")
+=======
+     * 
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/materiels", name="materiels_index")
      * 
      */
@@ -32,7 +36,11 @@ class MaterielController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire de création d'un materiel
+<<<<<<< HEAD
      * @IsGranted("ROLE_ADMIN")
+=======
+     * 
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/materiels/new", name="materiels_create")
      * 
      * @return Response
@@ -69,7 +77,11 @@ class MaterielController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire d'édition
+<<<<<<< HEAD
      * @IsGranted("ROLE_ADMIN")
+=======
+     *
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/materiels/edit/{id}", name="materiels_edit")
      * 
      * @return Response
@@ -104,7 +116,11 @@ class MaterielController extends AbstractController
 
     /**
      * Permet de supprimer un materiel
+<<<<<<< HEAD
      * @IsGranted("ROLE_ADMIN")
+=======
+     *
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/materiels/delete/{id}", name="materiels_delete")
      * 
      * @param Materiel $materiel

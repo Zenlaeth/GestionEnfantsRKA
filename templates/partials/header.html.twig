@@ -10,6 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         {% if app.user %}
             <ul class="navbar-nav mr-auto">
+<<<<<<< HEAD
                 <li class="nav-item">
                     <a href="{{ path('enfants_index') }}" class="nav-link">Enfants</a>
                 </li>      
@@ -25,6 +26,23 @@
                         <li class="nav-item">         
                             <a href="{{ path('materiels_index') }}" class="nav-link">Materiels</a>
                         </li>
+=======
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">Gestion enfants</a>
+                    <div class="dropdown-menu">
+                        <a href="{{ path('enfants_index') }}" class="dropdown-item">Liste des enfants</a>
+                        <a href="{{ path('representants_index') }}" class="dropdown-item">Liste des representants</a>
+                    </div>
+                </li>       
+                <li class="nav-item">         
+                    <a href="{{ path('facturations_index') }}" class="nav-link">Factures</a>
+                </li>
+                <li class="nav-item">         
+                    <a href="{{ path('materiels_index') }}" class="nav-link">Materiels</a>
+                </li>
+                {% for role in app.user.RolesUser %}
+                    {% if role.titre == "ROLE_ADMIN" %}
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
                         <div class="dropdown-menu">

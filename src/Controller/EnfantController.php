@@ -126,7 +126,10 @@ class EnfantController extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * Permet d'afficher le profil d'un enfant
+=======
+>>>>>>> 3b22cb07581b10de67159807621b096f7ca5323a
      * @Route("/enfant/{id}", name="enfant_show")
      */
     public function profil(Enfant $enfant)
