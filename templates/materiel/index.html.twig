@@ -31,7 +31,7 @@
                 <th>{{materiel.MATQuantiteSortie}}</th>
                 <th>{{materiel.MATQuantitePerdu}}</th>
                 <th>{{materiel.MATQuantiteVendu}}</th>
-                <th>{{materiel.MATQuantiteTotal}}</th>
+                <th>{{materiel.MATQuantite - materiel.MATQuantiteSortie - materiel.MATQuantitePerdu - materiel.MATQuantiteVendu}}</th>
                 <th>{{materiel.MATAuteur.TitreFullName}}</th>
                 <th>
                     <a href="{{ path('materiels_edit', {'id': materiel.id}) }}">

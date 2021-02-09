@@ -21,7 +21,6 @@ class MaterielType extends ApplicationType
             ->add('MAT_QuantiteSortie', IntegerType::class, $this->getConfiguration("Quantité sortie", "Donnez une quantité sortie"))
             ->add('MAT_QuantitePerdu', IntegerType::class, $this->getConfiguration("Quantité perdu", "Donnez une quantité perdu"))
             ->add('MAT_QuantiteVendu', IntegerType::class, $this->getConfiguration("Quantité vendu", "Donnez une quantité vendu"))
-            ->add('MAT_QuantiteTotal', IntegerType::class, $this->getConfiguration("Quantité total", "Donnez une quantité total"))
         ;
     }
 

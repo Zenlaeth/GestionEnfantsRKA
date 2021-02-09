@@ -46,9 +46,7 @@ class FacturationType extends ApplicationType
             ,
             'required' => true,
             'label' => "Moyen de paiement"
-        ]
-        
-        )
+        ])
             ->add('FAC_Tarif',
             EntityType::class, [
             'class' => Tarif::class,
