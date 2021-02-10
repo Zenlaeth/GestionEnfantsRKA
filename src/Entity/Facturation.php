@@ -57,6 +57,7 @@ class Facturation
     private $FAC_auteur;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity=CarteBancaire::class, inversedBy="facturations")
      */
     private $FAC_MoyenCB;
@@ -76,6 +77,34 @@ class Facturation
      */
     private $FAC_MoyenESP;
 
+=======
+     * @ORM\OneToMany(targetEntity=CarteBancaire::class, mappedBy="CARD_facturation")
+     */
+    private $carteBancaires;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cheque::class, mappedBy="CHE_Facturation")
+     */
+    private $cheques;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ChequeVacances::class, mappedBy="CHEV_Facturation")
+     */
+    private $chequeVacances;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Especes::class, mappedBy="ESP_Facturation")
+     */
+    private $especes;
+
+    public function __construct()
+    {
+        $this->carteBancaires = new ArrayCollection();
+        $this->cheques = new ArrayCollection();
+        $this->chequeVacances = new ArrayCollection();
+        $this->especes = new ArrayCollection();
+    }
+>>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
     
 
     public function getId(): ?int

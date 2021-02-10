@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ChequeVacancesRepository;
+<<<<<<< HEAD
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+=======
+>>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +58,7 @@ class ChequeVacances
     private $CHEV_adresseEmployeur;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="chequeVacances")
      */
     private $CHE_Moyen;
@@ -68,6 +72,16 @@ class ChequeVacances
     {
         $this->facturations = new ArrayCollection();
     }
+=======
+     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="chequeVacances")
+     */
+    private $CHEV_Facturation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="chequeVacances")
+     */
+    private $CHE_Moyen;
+>>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 
     public function getId(): ?int
     {
@@ -158,6 +172,7 @@ class ChequeVacances
         return $this;
     }
 
+<<<<<<< HEAD
     public function getCHEMoyen(): ?MoyenPaiement
     {
         return $this->CHE_Moyen;
@@ -166,10 +181,21 @@ class ChequeVacances
     public function setCHEMoyen(?MoyenPaiement $CHE_Moyen): self
     {
         $this->CHE_Moyen = $CHE_Moyen;
+=======
+    public function getCHEVFacturation(): ?Facturation
+    {
+        return $this->CHEV_Facturation;
+    }
+
+    public function setCHEVFacturation(?Facturation $CHEV_Facturation): self
+    {
+        $this->CHEV_Facturation = $CHEV_Facturation;
+>>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 
         return $this;
     }
 
+<<<<<<< HEAD
     /**
      * @return Collection|Facturation[]
      */
@@ -196,6 +222,16 @@ class ChequeVacances
                 $facturation->setFACMoyenCHEV(null);
             }
         }
+=======
+    public function getCHEMoyen(): ?MoyenPaiement
+    {
+        return $this->CHE_Moyen;
+    }
+
+    public function setCHEMoyen(?MoyenPaiement $CHE_Moyen): self
+    {
+        $this->CHE_Moyen = $CHE_Moyen;
+>>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 
         return $this;
     }
