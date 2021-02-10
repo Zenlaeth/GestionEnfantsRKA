@@ -16,7 +16,27 @@
         {{ form_end(form) }}
     </div>
 {% endblock %}
- 
+
 {% block javascripts %}
-    
+    <script>
+ 
+        var $moyenPaiement = $("#fac_moyenPaiement");
+ 
+        $moyenPaiement.change(function () {
+            var $form = $(this).closest('form');
+ 
+            var data = {};
+            data[$moyenPaiement.attr('name')] = $moyenPaiement.val();
+ 
+            console.log(data[$moyenPaiement.attr('tarif_libelle')]);
+            $valeur = data[$moyenPaiement.attr('tarif_libelle')];
+ 
+            $.post($form.attr('action'), data).then(function (data) {
+
+                }
+ 
+            })
+ 
+        })
+    </script>
 {% endblock %}

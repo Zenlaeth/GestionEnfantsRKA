@@ -47,6 +47,11 @@ class Cheque
      */
     private $CHE_moyen;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="cheques")
+     */
+    private $CHE_Facturation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +125,18 @@ class Cheque
     public function setCHEMoyen(?MoyenPaiement $CHE_moyen): self
     {
         $this->CHE_moyen = $CHE_moyen;
+
+        return $this;
+    }
+
+    public function getCHEFacturation(): ?Facturation
+    {
+        return $this->CHE_Facturation;
+    }
+
+    public function setCHEFacturation(?Facturation $CHE_Facturation): self
+    {
+        $this->CHE_Facturation = $CHE_Facturation;
 
         return $this;
     }

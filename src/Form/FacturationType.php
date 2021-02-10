@@ -46,9 +46,7 @@ class FacturationType extends ApplicationType
             ,
             'required' => true,
             'label' => "Moyen de paiement"
-        ]
-        
-        )
+        ])
             ->add('FAC_Tarif',
             EntityType::class, [
             'class' => Tarif::class,
@@ -67,14 +65,18 @@ class FacturationType extends ApplicationType
         ;
 
         /*$builder->addEventListener(
-        	FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                $facturation = $event->getData(); //recuperation de l'objet sur lequel le formulaire se base
+        	FormEvents::POST_SET_DATA, function (FormEvent $event) { // POST_SUBMIT
+
 	            $form = $event->getForm(); //recuperation du formulaire
+                $data = $event->getData();
+                $moyenPaiement = $data->getFACMoyenPaiement();
                 
-                if ($facturation->getFACMoyenPaiement()->getMoyenLibelle()=='Carte bancaire') {
-                    $form->add('FAC_MoyenPaiement', CarteBancaireType::class);
-                } else {
-                    $form->add('civility', null, array('label' => 'Civilité : '));
+                if ($moyenPaiement != null) {
+                    if ($moyenPaiement->getMoyenLibelle() == "Carte bancaire") {
+                        $form->add('Moyen_Libelle', CarteBancaireType::class);
+                    } else {
+                        $form->add('FAC_MoyenPaiement', CarteBancaireType::class);
+                }
             }
         });*/
         

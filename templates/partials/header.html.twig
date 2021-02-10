@@ -9,30 +9,51 @@
 
     <div class="collapse navbar-collapse" id="navbarColor02">
         {% if app.user %}
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">Gestion enfants</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ path('enfants_index') }}" class="dropdown-item">Liste des enfants</a>
-                        <a href="{{ path('representants_index') }}" class="dropdown-item">Liste des representants</a>
-                    </div>
-                </li>       
-                <li class="nav-item">         
-                    <a href="{{ path('facturations_index') }}" class="nav-link">Factures</a>
-                </li>
-                <li class="nav-item">         
-                    <a href="{{ path('materiels_index') }}" class="nav-link">Materiels</a>
-                </li>
+            <ul class="navbar-nav mr-auto">      
                 {% for role in app.user.RolesUser %}
                     {% if role.titre == "ROLE_ADMIN" %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ path('users_index') }}">Liste des uilisateurs</a>
-                            <a class="dropdown-item" href="{{ path('modifications_index') }}">Factures modifiés</a>
-                            <a class="dropdown-item" href="{{ path('annulations_index') }}">Factures annulés</a>
-                        </div>
+                        <li class="nav-item">
+                            <a href="{{ path('enfants_index') }}" class="nav-link">Enfants</a>
                         </li>
+                        <li class="nav-item">    
+                            <a href="{{ path('representants_index') }}" class="nav-link">Representants</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Factures</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ path('facturations_index') }}">Liste des facturations</a>
+                                <a class="dropdown-item" href="{{ path('modifications_index') }}">Factures modifiés</a>
+                                <a class="dropdown-item" href="{{ path('annulations_index') }}">Factures annulés</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">         
+                            <a href="{{ path('materiels_index') }}" class="nav-link">Materiels</a>
+                        </li>
+                        <li class="nav-item">         
+                            <a href="{{ path('users_index') }}" class="nav-link">Utilisateurs</a>
+                        </li>
+                        {% elseif role.titre == "ROLE_FORMATEUR" %}
+                        <li class="nav-item">
+                            <a href="{{ path('enfants_index') }}" class="nav-link">Enfants</a>
+                        </li>
+                        {% elseif role.titre == "ROLE_COMPTA" %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Factures</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ path('facturations_index') }}">Liste des facturations</a>
+                                <a class="dropdown-item" href="{{ path('modifications_index') }}">Factures modifiés</a>
+                                <a class="dropdown-item" href="{{ path('annulations_index') }}">Factures annulés</a>
+                            </div>
+                            </li>
+
+                        {% elseif role.titre == "ROLE_SECRETAIRE" %}
+                            <li class="nav-item">
+                                <a href="{{ path('enfants_index') }}" class="nav-link">Enfants</a>
+                            </li>
+                            <li class="nav-item">         
+                                <a href="{{ path('users_index') }}" class="nav-link">Utilisateurs</a>
+                            </li>
+
                     {% endif %}
                 {% endfor %}
             </ul>

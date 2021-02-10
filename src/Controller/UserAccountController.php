@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\PasswordUpdate;
-use App\Entity\Role;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
 use App\Repository\UserRepository;
@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -24,7 +25,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet d'afficher la liste de tous les utilisateurs
      * 
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/users", name="users_index")
      */
     public function index(UserRepository $repo)
@@ -39,7 +40,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet d'afficher le formulaire de création d'un utilisateur
      * 
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/users/new", name="users_create")
      * 
      * @return Response
@@ -75,7 +76,7 @@ class UserAccountController extends AbstractController
             );
 
             //Redirection vers la liste
-            return $this->redirectToRoute('enfants_index');
+            return $this->redirectToRoute('users_index');
         }
 
         return $this->render('user/new.html.twig', [
@@ -86,7 +87,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet d'afficher le formulaire d'édition
      *
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/users/edit/{id}", name="users_edit")
      * 
      * @return Response
@@ -127,7 +128,7 @@ class UserAccountController extends AbstractController
     /**
      * Permet de supprimer un user
      *
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/users/delete/{id}", name="users_delete")
      * 
      * @param User $user

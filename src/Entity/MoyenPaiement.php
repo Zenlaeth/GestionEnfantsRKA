@@ -40,11 +40,23 @@ class MoyenPaiement
      */
     private $cheques;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ChequeVacances::class, mappedBy="CHE_Moyen")
+     */
+    private $chequeVacances;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Especes::class, mappedBy="ESP_Moyen")
+     */
+    private $especes;
+
     public function __construct()
     {
         $this->Moyen_Facturation = new ArrayCollection();
         $this->carteBancaires = new ArrayCollection();
         $this->cheques = new ArrayCollection();
+        $this->chequeVacances = new ArrayCollection();
+        $this->especes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +160,66 @@ class MoyenPaiement
             // set the owning side to null (unless already changed)
             if ($cheque->getCHEMoyen() === $this) {
                 $cheque->setCHEMoyen(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ChequeVacances[]
+     */
+    public function getChequeVacances(): Collection
+    {
+        return $this->chequeVacances;
+    }
+
+    public function addChequeVacance(ChequeVacances $chequeVacance): self
+    {
+        if (!$this->chequeVacances->contains($chequeVacance)) {
+            $this->chequeVacances[] = $chequeVacance;
+            $chequeVacance->setCHEMoyen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChequeVacance(ChequeVacances $chequeVacance): self
+    {
+        if ($this->chequeVacances->removeElement($chequeVacance)) {
+            // set the owning side to null (unless already changed)
+            if ($chequeVacance->getCHEMoyen() === $this) {
+                $chequeVacance->setCHEMoyen(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Especes[]
+     */
+    public function getEspeces(): Collection
+    {
+        return $this->especes;
+    }
+
+    public function addEspece(Especes $espece): self
+    {
+        if (!$this->especes->contains($espece)) {
+            $this->especes[] = $espece;
+            $espece->setESPMoyen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEspece(Especes $espece): self
+    {
+        if ($this->especes->removeElement($espece)) {
+            // set the owning side to null (unless already changed)
+            if ($espece->getESPMoyen() === $this) {
+                $espece->setESPMoyen(null);
             }
         }
 

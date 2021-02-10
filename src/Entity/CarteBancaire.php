@@ -42,6 +42,11 @@ class CarteBancaire
      */
     private $CARD_Moyen;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="carteBancaires")
+     */
+    private $CARD_facturation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class CarteBancaire
     public function setCARDMoyen(?MoyenPaiement $CARD_Moyen): self
     {
         $this->CARD_Moyen = $CARD_Moyen;
+
+        return $this;
+    }
+
+    public function getCARDFacturation(): ?Facturation
+    {
+        return $this->CARD_facturation;
+    }
+
+    public function setCARDFacturation(?Facturation $CARD_facturation): self
+    {
+        $this->CARD_facturation = $CARD_facturation;
 
         return $this;
     }

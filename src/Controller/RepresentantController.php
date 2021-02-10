@@ -17,7 +17,7 @@ class RepresentantController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de tous les representants
-     * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/representants", name="representants_index")
      * 
      */
@@ -32,7 +32,7 @@ class RepresentantController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire de création d'un representant
-     * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/representants/new", name="representants_create")
      * 
      * @return Response
@@ -67,7 +67,7 @@ class RepresentantController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire d'édition
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/representants/edit/{id}", name="representants_edit")
      * 
      * @return Response
@@ -102,7 +102,7 @@ class RepresentantController extends AbstractController
 
     /**
      * Permet de supprimer un representant
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/representants/delete/{id}", name="representants_delete")
      * 
      * @param RepresentantLegal $representant

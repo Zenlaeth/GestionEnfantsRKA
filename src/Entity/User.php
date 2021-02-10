@@ -86,6 +86,12 @@ class User implements UserInterface
             elseif ($role->getTitre() == "ROLE_FORMATEUR") {
                 return "{$this->nom} {$this->prenom}";
             }
+            elseif ($role->getTitre() == "ROLE_SECRETAIRE") {
+                return "{$this->nom} {$this->prenom}";
+            }
+            elseif ($role->getTitre() == "ROLE_COMPTA") {
+                return "{$this->nom} {$this->prenom}";
+            }
         }
     }
 

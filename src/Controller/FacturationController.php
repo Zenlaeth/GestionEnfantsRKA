@@ -20,7 +20,7 @@ class FacturationController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de toutes les facturations
-     * 
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTA')")
      * @Route("/facturations", name="facturations_index")
      * 
      */
@@ -35,7 +35,7 @@ class FacturationController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire de création d'une facturation
-     * 
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTA')")
      * @Route("/facturations/new", name="facturations_create")
      * 
      * @return Response
@@ -71,7 +71,7 @@ class FacturationController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire d'édition
-     *
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTA')")
      * @Route("/facturations/edit/{id}", name="facturations_edit")
      * @param Facturation $facturation
      * @param EntityManagerInterface $manager
@@ -118,7 +118,7 @@ class FacturationController extends AbstractController
 
     /**
      * Permet d'annuler une facturation
-     * 
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTA')"))
      * @Route("/facturations/cancel/{id}", name="facturations_cancel")
      * 
      * @param Facturation $facturation

@@ -17,7 +17,7 @@ class EnfantController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de tous les enfants
-     * 
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_FORMATEUR')")
      * @Route("/enfants", name="enfants_index")
      * 
      */
@@ -32,7 +32,7 @@ class EnfantController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire de création d'un enfant
-     * 
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/enfants/new", name="enfants_create")
      * 
      * @return Response
@@ -69,7 +69,7 @@ class EnfantController extends AbstractController
 
     /**
      * Permet d'afficher le formulaire d'édition
-     *
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_FORMATEUR') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/enfants/edit/{id}", name="enfants_edit")
      * 
      * @return Response
@@ -104,7 +104,7 @@ class EnfantController extends AbstractController
 
     /**
      * Permet de supprimer un enfant
-     *
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/enfants/delete/{id}", name="enfants_delete")
      * 
      * @param Enfant $enfant
@@ -126,6 +126,8 @@ class EnfantController extends AbstractController
     }
 
     /**
+     * Permet d'afficher le profil d'un enfant
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/enfant/{id}", name="enfant_show")
      */
     public function profil(Enfant $enfant)
