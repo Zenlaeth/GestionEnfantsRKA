@@ -12,6 +12,7 @@ use App\Entity\Facturation;
 use App\Entity\CarteBancaire;
 use App\Entity\MoyenPaiement;
 use App\Form\ApplicationType;
+use App\Form\CarteBancaireType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class FacturationType extends ApplicationType
 {
@@ -62,17 +64,23 @@ class FacturationType extends ApplicationType
             'required' => true,
             'label' => "Statut"
         ])
+            ->add('FAC_MoyenCB', CarteBancaireType::class, array('data_class' => null, 'label' => "Carte bancaire", 'required' => true)
+            );
         ;
 
         /*$builder->addEventListener(
-        	FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                $facturation = $event->getData(); //recuperation de l'objet sur lequel le formulaire se base
+        	FormEvents::POST_SET_DATA, function (FormEvent $event) { // POST_SUBMIT
+
 	            $form = $event->getForm(); //recuperation du formulaire
+                $data = $event->getData();
+                $moyenPaiement = $data->getFACMoyenPaiement();
                 
-                if ($facturation->getFACMoyenPaiement()->getMoyenLibelle()=='Carte bancaire') {
-                    $form->add('FAC_MoyenPaiement', CarteBancaireType::class);
-                } else {
-                    $form->add('civility', null, array('label' => 'Civilité : '));
+                if ($moyenPaiement != null) {
+                    if ($moyenPaiement->getMoyenLibelle() == "Carte bancaire") {
+                        $form->add('Moyen_Libelle', CarteBancaireType::class);
+                    } else {
+                        $form->add('FAC_MoyenPaiement', CarteBancaireType::class);
+                }
             }
         });*/
         

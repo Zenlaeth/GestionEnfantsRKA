@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarteBancaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,17 @@ class CarteBancaire
      * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="carteBancaires")
      */
     private $CARD_Moyen;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCB")
+     */
+    private $facturations;
+
+    public function __construct()
+    {
+        $this->facturations = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -103,6 +116,36 @@ class CarteBancaire
     public function setCARDMoyen(?MoyenPaiement $CARD_Moyen): self
     {
         $this->CARD_Moyen = $CARD_Moyen;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Facturation[]
+     */
+    public function getFacturations(): Collection
+    {
+        return $this->facturations;
+    }
+
+    public function addFacturation(Facturation $facturation): self
+    {
+        if (!$this->facturations->contains($facturation)) {
+            $this->facturations[] = $facturation;
+            $facturation->setFACMoyenCB($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacturation(Facturation $facturation): self
+    {
+        if ($this->facturations->removeElement($facturation)) {
+            // set the owning side to null (unless already changed)
+            if ($facturation->getFACMoyenCB() === $this) {
+                $facturation->setFACMoyenCB(null);
+            }
+        }
 
         return $this;
     }

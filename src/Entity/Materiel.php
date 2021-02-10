@@ -40,11 +40,6 @@ class Materiel
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $MAT_quantiteTotal;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $MAT_quantitePerdu;
 
     /**
@@ -106,18 +101,6 @@ class Materiel
     public function setMATQuantiteSortie(int $MAT_quantiteSortie): self
     {
         $this->MAT_quantiteSortie = $MAT_quantiteSortie;
-
-        return $this;
-    }
-
-    public function getMATQuantiteTotal(): ?int
-    {
-        return $this->MAT_quantiteTotal;
-    }
-
-    public function setMATQuantiteTotal(int $MAT_quantiteTotal): self
-    {
-        $this->MAT_quantiteTotal = $MAT_quantiteTotal;
 
         return $this;
     }

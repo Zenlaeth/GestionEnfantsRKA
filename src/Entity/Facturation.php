@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Tarif;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FacturationRepository;
 
@@ -50,14 +52,30 @@ class Facturation
     private $FAC_Statut;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $FAC_total = 0;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="facturations")
      */
     private $FAC_auteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CarteBancaire::class, inversedBy="facturations")
+     */
+    private $FAC_MoyenCB;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Cheque::class, inversedBy="facturations")
+     */
+    private $FAC_MoyenCHE;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=ChequeVacances::class, inversedBy="facturations")
+     */
+    private $FAC_MoyenCHEV;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Especes::class, inversedBy="facturations")
+     */
+    private $FAC_MoyenESP;
+
     
 
     public function getId(): ?int
@@ -97,18 +115,6 @@ class Facturation
     public function setFACOptionPaiement(int $FAC_optionPaiement): self
     {
         $this->FAC_optionPaiement = $FAC_optionPaiement;
-
-        return $this;
-    }
-
-    public function getFACTotal(): ?float
-    {
-        return $this->FAC_total;
-    }
-
-    public function setFACTotal(?float $FAC_total): self
-    {
-        $this->FAC_total = $FAC_total;
 
         return $this;
     }
@@ -161,5 +167,51 @@ class Facturation
         return $this;
     }
 
+    public function getFACMoyenCB(): ?CarteBancaire
+    {
+        return $this->FAC_MoyenCB;
+    }
 
+    public function setFACMoyenCB(?CarteBancaire $FAC_MoyenCB): self
+    {
+        $this->FAC_MoyenCB = $FAC_MoyenCB;
+
+        return $this;
+    }
+
+    public function getFACMoyenCHE(): ?Cheque
+    {
+        return $this->FAC_MoyenCHE;
+    }
+
+    public function setFACMoyenCHE(?Cheque $FAC_MoyenCHE): self
+    {
+        $this->FAC_MoyenCHE = $FAC_MoyenCHE;
+
+        return $this;
+    }
+
+    public function getFACMoyenCHEV(): ?ChequeVacances
+    {
+        return $this->FAC_MoyenCHEV;
+    }
+
+    public function setFACMoyenCHEV(?ChequeVacances $FAC_MoyenCHEV): self
+    {
+        $this->FAC_MoyenCHEV = $FAC_MoyenCHEV;
+
+        return $this;
+    }
+
+    public function getFACMoyenESP(): ?Especes
+    {
+        return $this->FAC_MoyenESP;
+    }
+
+    public function setFACMoyenESP(?Especes $FAC_MoyenESP): self
+    {
+        $this->FAC_MoyenESP = $FAC_MoyenESP;
+
+        return $this;
+    }
 }

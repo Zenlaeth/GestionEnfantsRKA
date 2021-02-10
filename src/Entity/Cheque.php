@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChequeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Cheque
      * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="cheques")
      */
     private $CHE_moyen;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCHE")
+     */
+    private $facturations;
+
+    public function __construct()
+    {
+        $this->facturations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,36 @@ class Cheque
     public function setCHEMoyen(?MoyenPaiement $CHE_moyen): self
     {
         $this->CHE_moyen = $CHE_moyen;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Facturation[]
+     */
+    public function getFacturations(): Collection
+    {
+        return $this->facturations;
+    }
+
+    public function addFacturation(Facturation $facturation): self
+    {
+        if (!$this->facturations->contains($facturation)) {
+            $this->facturations[] = $facturation;
+            $facturation->setFACMoyenCHE($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacturation(Facturation $facturation): self
+    {
+        if ($this->facturations->removeElement($facturation)) {
+            // set the owning side to null (unless already changed)
+            if ($facturation->getFACMoyenCHE() === $this) {
+                $facturation->setFACMoyenCHE(null);
+            }
+        }
 
         return $this;
     }
