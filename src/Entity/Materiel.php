@@ -38,7 +38,7 @@ class Materiel
     private $MAT_quantiteSortie;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $MAT_quantitePerdu;
 
