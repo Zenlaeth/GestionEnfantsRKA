@@ -20,32 +20,27 @@ class CarteBancaire
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CARD_num;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $CARD_dateExp;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $CARD_crypto;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CARD_nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="carteBancaires")
-     */
-    private $CARD_Moyen;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCB")
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCB", cascade={"persist", "remove"})
      */
     private $facturations;
 
@@ -104,18 +99,6 @@ class CarteBancaire
     public function setCARDNom(string $CARD_nom): self
     {
         $this->CARD_nom = $CARD_nom;
-
-        return $this;
-    }
-
-    public function getCARDMoyen(): ?MoyenPaiement
-    {
-        return $this->CARD_Moyen;
-    }
-
-    public function setCARDMoyen(?MoyenPaiement $CARD_Moyen): self
-    {
-        $this->CARD_Moyen = $CARD_Moyen;
 
         return $this;
     }

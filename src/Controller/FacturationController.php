@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Enfant;
 use App\Entity\Facturation;
+use App\Entity\CarteBancaire;
 use App\Form\FacturationType;
+use App\Form\CarteBancaireType;
 use App\Entity\AnnulationFacturation;
 use App\Entity\ModificationFacturation;
 use Doctrine\ORM\EntityManagerInterface;
@@ -91,7 +93,6 @@ class FacturationController extends AbstractController
             $modification->setFACCode($facturation->getFACCode());
             $modification->setFACEnfant($facturation->getFACEnfant());
             $modification->setFACOptionPaiement($facturation->getFACOptionPaiement());
-            $modification->setFACTotal($facturation->getFACTotal());
             $modification->setFACMoyenPaiement($facturation->getFACMoyenPaiement());
             $modification->setFACTarif($facturation->getFACTarif());
             $modification->setFACStatut($facturation->getFACStatut());
@@ -134,7 +135,6 @@ class FacturationController extends AbstractController
         $annulation->setFACCode($facturation->getFACCode());
         $annulation->setFACEnfant($facturation->getFACEnfant());
         $annulation->setFACOptionPaiement($facturation->getFACOptionPaiement());
-        $annulation->setFACTotal($facturation->getFACTotal());
         $annulation->setFACMoyenPaiement($facturation->getFACMoyenPaiement());
         $annulation->setFACTarif($facturation->getFACTarif());
         $annulation->setFACStatut($facturation->getFACStatut());

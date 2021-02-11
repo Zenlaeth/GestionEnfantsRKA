@@ -26,7 +26,6 @@ class EnfantType extends ApplicationType
             ->add('ENF_DateNaiss', DateType::class, array(
                 'widget' => 'choice',
                 'years' => range(date('Y'), date('Y')-18),
-                'months' => range(date('m'), 12),
                 'label' => "Date de naissance"
                 ))
             ->add('ENF_Note', IntegerType::class, $this->getConfiguration("Note", "Entrez une note sur 5"))

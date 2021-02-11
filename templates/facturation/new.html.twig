@@ -9,11 +9,54 @@
        
         {{ form_start(form) }}
 
-        {{ form_widget(form) }}
+        <div class="card border-primary mb-3">
+            <div class="card-body">
+                {{ form_label(form.FAC_Code) }}
+                {{ form_widget(form.FAC_Code) }}
+                {{ form_label(form.FAC_Enfant) }}
+                {{ form_widget(form.FAC_Enfant) }}
+                {{ form_label(form.FAC_MoyenPaiement) }}
+                {{ form_widget(form.FAC_MoyenPaiement) }}
+                {{ form_label(form.FAC_Tarif) }}
+                {{ form_widget(form.FAC_Tarif) }}
+                {{ form_label(form.FAC_OptionPaiement) }}
+                {{ form_widget(form.FAC_OptionPaiement) }}
+                {{ form_label(form.FAC_Statut) }}
+                {{ form_widget(form.FAC_Statut) }}
+            </div>
+        </div>
+
+        <h1 class="my-3">Remplissez le ou les moyens de paiements (cb, chèque, chèque vacances et/ou espèces)</h1>
+
+        <div class="card border-success mb-3">
+            <div class="card-body">
+                {{ form_label(form.FAC_MoyenCB) }}
+                {{ form_widget(form.FAC_MoyenCB) }}
+            </div>
+        </div>
+
+        <div class="card border-danger mb-3">
+            <div class="card-body">
+                {{ form_label(form.FAC_MoyenCHE) }}
+                {{ form_widget(form.FAC_MoyenCHE) }}
+            </div>
+        </div>
+
+        <div class="card border-warning mb-3">
+            <div class="card-body">
+                {{ form_label(form.FAC_MoyenCHEV) }}
+                {{ form_widget(form.FAC_MoyenCHEV) }}
+            </div>
+        </div>
+
+        <div class="card border-info mb-3">
+            <div class="card-body">
+                {{ form_label(form.FAC_MoyenESP) }}
+                {{ form_widget(form.FAC_MoyenESP) }}
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-primary">Créer une nouvelle facture</button>
-
-        {{ form_end(form) }}
     </div>
 {% endblock %}
 

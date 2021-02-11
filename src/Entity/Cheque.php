@@ -20,37 +20,32 @@ class Cheque
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $CHE_montant;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHE_montantLettres;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHE_nomBeneficiaire;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHE_lieu;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $CHE_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="cheques")
-     */
-    private $CHE_moyen;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCHE")
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCHE", cascade={"persist", "remove"})
      */
     private $facturations;
 
@@ -120,18 +115,6 @@ class Cheque
     public function setCHEDate(\DateTimeInterface $CHE_date): self
     {
         $this->CHE_date = $CHE_date;
-
-        return $this;
-    }
-
-    public function getCHEMoyen(): ?MoyenPaiement
-    {
-        return $this->CHE_moyen;
-    }
-
-    public function setCHEMoyen(?MoyenPaiement $CHE_moyen): self
-    {
-        $this->CHE_moyen = $CHE_moyen;
 
         return $this;
     }

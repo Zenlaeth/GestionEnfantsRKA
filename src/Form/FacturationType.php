@@ -5,14 +5,20 @@ namespace App\Form;
 
 
 use App\Entity\Tarif;
+use App\Entity\Cheque;
 use App\Entity\Enfant;
 use App\Entity\Statut;
+use App\Entity\Especes;
+use App\Form\ChequeType;
 use App\Form\EnfantType;
+use App\Form\EspecesType;
 use App\Entity\Facturation;
 use App\Entity\CarteBancaire;
 use App\Entity\MoyenPaiement;
 use App\Form\ApplicationType;
+use App\Entity\ChequeVacances;
 use App\Form\CarteBancaireType;
+use App\Form\ChequeVacancesType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -64,8 +70,11 @@ class FacturationType extends ApplicationType
             'required' => true,
             'label' => "Statut"
         ])
-            ->add('FAC_MoyenCB', CarteBancaireType::class, array('data_class' => null, 'label' => "Carte bancaire", 'required' => true)
-            );
+            ->add('FAC_MoyenCB', CarteBancaireType::class, array('data_class' => CarteBancaire::class, 'label' => "Carte bancaire", 'required' => false))
+            ->add('FAC_MoyenCHE', ChequeType::class, array('data_class' => Cheque::class, 'label' => "Cheque", 'required' => false))
+            ->add('FAC_MoyenCHEV', ChequeVacancesType::class, array('data_class' => ChequeVacances::class, 'label' => "Cheque vacances", 'required' => false))
+            ->add('FAC_MoyenESP', EspecesType::class, array('data_class' => Especes::class, 'label' => "Especes", 'required' => false))
+            ;
         ;
 
         /*$builder->addEventListener(
@@ -89,7 +98,7 @@ class FacturationType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Facturation::class,
+            'data_class' => Facturation::class
         ]);
     }
 }
