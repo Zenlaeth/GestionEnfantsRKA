@@ -1,17 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Création d'un enfant{% endblock %}
+{% block title %}Création d'un représentant{% endblock %}
 
 
 {% block body %}
     <div class="container">
-        <h1 class="my-3">Créer un nouveau enfant</h1>
+        <h1 class="my-3">Créer un nouveau représentant</h1>
        
         {{ form_start(form) }}
 
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary">Créer un nouveau enfant</button>
+        <button type="submit" class="btn btn-primary">Créer un nouveau représentant</button>
 
         {{ form_end(form) }}
     </div>
