@@ -3,11 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChequeVacancesRepository;
-<<<<<<< HEAD
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-=======
->>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,53 +15,47 @@ class ChequeVacances
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $CHEV_montant;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $CHEV_validite;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $CHEV_anneeEmission;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHEV_nomTitulaire;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHEV_adresseTitulaire;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHEV_nomEmployeur;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CHEV_adresseEmployeur;
 
     /**
-<<<<<<< HEAD
-     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="chequeVacances")
-     */
-    private $CHE_Moyen;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCHEV")
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenCHEV", cascade={"persist", "remove"})
      */
     private $facturations;
 
@@ -72,16 +63,6 @@ class ChequeVacances
     {
         $this->facturations = new ArrayCollection();
     }
-=======
-     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="chequeVacances")
-     */
-    private $CHEV_Facturation;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="chequeVacances")
-     */
-    private $CHE_Moyen;
->>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 
     public function getId(): ?int
     {
@@ -172,30 +153,6 @@ class ChequeVacances
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getCHEMoyen(): ?MoyenPaiement
-    {
-        return $this->CHE_Moyen;
-    }
-
-    public function setCHEMoyen(?MoyenPaiement $CHE_Moyen): self
-    {
-        $this->CHE_Moyen = $CHE_Moyen;
-=======
-    public function getCHEVFacturation(): ?Facturation
-    {
-        return $this->CHEV_Facturation;
-    }
-
-    public function setCHEVFacturation(?Facturation $CHEV_Facturation): self
-    {
-        $this->CHEV_Facturation = $CHEV_Facturation;
->>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
-
-        return $this;
-    }
-
-<<<<<<< HEAD
     /**
      * @return Collection|Facturation[]
      */
@@ -222,16 +179,6 @@ class ChequeVacances
                 $facturation->setFACMoyenCHEV(null);
             }
         }
-=======
-    public function getCHEMoyen(): ?MoyenPaiement
-    {
-        return $this->CHE_Moyen;
-    }
-
-    public function setCHEMoyen(?MoyenPaiement $CHE_Moyen): self
-    {
-        $this->CHE_Moyen = $CHE_Moyen;
->>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 
         return $this;
     }

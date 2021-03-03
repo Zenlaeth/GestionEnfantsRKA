@@ -17,7 +17,7 @@ class EnfantController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de tous les enfants
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_FORMATEUR')")
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_FORMATEUR') or is_granted('ROLE_SECRETAIRE')")
      * @Route("/enfants", name="enfants_index")
      * 
      */

@@ -190,4 +190,9 @@ class Enfant
 
         return $this;
     }
+
+    public static function getEntityFqcn(): string
+    {
+        return Enfant::class;
+    }
 }

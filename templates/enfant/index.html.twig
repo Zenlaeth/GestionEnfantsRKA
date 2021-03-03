@@ -5,7 +5,7 @@
 {% block body %}
 {% if app.user %}
     {% for role in app.user.RolesUser %}
-        {% if role.titre == "ROLE_ADMIN" %}
+        {% if (role.titre == "ROLE_ADMIN") or (role.titre == "ROLE_SECRETAIRE") %}
             <div class="container">
                 <h1 class="my-3"> Voici la liste des enfants !</h1>
                 <div class="row">

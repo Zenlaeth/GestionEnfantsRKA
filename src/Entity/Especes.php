@@ -20,17 +20,12 @@ class Especes
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $ESP_montant;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MoyenPaiement::class, inversedBy="especes")
-     */
-    private $ESP_Moyen;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenESP")
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="FAC_MoyenESP", cascade={"persist", "remove"})
      */
     private $facturations;
 
@@ -56,30 +51,6 @@ class Especes
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getESPMoyen(): ?MoyenPaiement
-    {
-        return $this->ESP_Moyen;
-    }
-
-    public function setESPMoyen(?MoyenPaiement $ESP_Moyen): self
-    {
-        $this->ESP_Moyen = $ESP_Moyen;
-=======
-    public function getESPFacturation(): ?Facturation
-    {
-        return $this->ESP_Facturation;
-    }
-
-    public function setESPFacturation(?Facturation $ESP_Facturation): self
-    {
-        $this->ESP_Facturation = $ESP_Facturation;
->>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
-
-        return $this;
-    }
-
-<<<<<<< HEAD
     /**
      * @return Collection|Facturation[]
      */
@@ -106,16 +77,6 @@ class Especes
                 $facturation->setFACMoyenESP(null);
             }
         }
-=======
-    public function getESPMoyen(): ?MoyenPaiement
-    {
-        return $this->ESP_Moyen;
-    }
-
-    public function setESPMoyen(?MoyenPaiement $ESP_Moyen): self
-    {
-        $this->ESP_Moyen = $ESP_Moyen;
->>>>>>> d4e7b8dccc12e7857ddb5cea964f7ad41eb66ffd
 
         return $this;
     }

@@ -50,11 +50,6 @@ class AnnulationFacturation
     private $FAC_Statut;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $FAC_total;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annulationFacturations")
      */
     private $ANNU_auteur;
@@ -97,18 +92,6 @@ class AnnulationFacturation
     public function setFACOptionPaiement(int $FAC_optionPaiement): self
     {
         $this->FAC_optionPaiement = $FAC_optionPaiement;
-
-        return $this;
-    }
-
-    public function getFACTotal(): ?float
-    {
-        return $this->FAC_total;
-    }
-
-    public function setFACTotal(?float $FAC_total): self
-    {
-        $this->FAC_total = $FAC_total;
 
         return $this;
     }
